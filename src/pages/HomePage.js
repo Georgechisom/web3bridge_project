@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import "../../src/component/home.css"
 
 const CATEGORIES = { 
   income: ['Salary', 'Bonus', 'Other'], 
@@ -28,7 +29,8 @@ const HomePage = () => {
 
   return (
     <div 
-    style={{ fontFamily: 'Arial, sans-serif', maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
+    style={{ fontFamily: 'Arial, sans-serif', maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}
+    className='new'>
       <h2>Personal Finance Tracker</h2> 
       <div>
         <h3>Add Transaction</h3> 
@@ -69,7 +71,7 @@ const HomePage = () => {
 
         <button 
           onClick={addTransaction} 
-          style={{ backgroundColor: '#4CAF50', color: 'white', padding: '8px 12px', border: 'none', borderRadius: '3px', cursor: 'pointer' }}
+          style={{ backgroundColor: 'blue', color: 'white', padding: '8px 12px', border: 'none', borderRadius: '3px', cursor: 'pointer', width: "100px" }}
         >Add</button> 
 
       </div>
