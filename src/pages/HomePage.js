@@ -8,15 +8,23 @@ const CATEGORIES = {
 const HomePage = () => {
   const [transactions, setTransactions] = useState([]); 
 
-  const [newTransaction, setNewTransaction] = useState({ type: 'expense', amount: '', category: '', notes: '', }); 
+  const [newTransaction, setNewTransaction] = useState({ type: 'expense', amount: '', category: '', notes: '', });
   
-  const handleInputChange = (e) => { const { name, value } = e.target; setNewTransaction((prev) => ({ ...prev, [name]: value })); };
+  const handleInputChange = (e) => { 
+    const { name, value } = e.target; setNewTransaction((prev) => ({ ...prev, [name]: value })); 
+  };
 
-  const addTransaction = () => { if (newTransaction.amount && newTransaction.category) { setTransactions([...transactions, { ...newTransaction, id: Date.now() }]); setNewTransaction({ type: 'expense', amount: '', category: '', notes: '' }); } };
+  const addTransaction = () => { 
+    if (newTransaction.amount && newTransaction.category) 
+      { 
+        setTransactions([...transactions, { ...newTransaction, id: Date.now() }]); 
+        setNewTransaction({ type: 'expense', amount: '', category: '', notes: '' }); 
+      } 
+  };
 
-  const totalIncome = transactions .filter((t) => t.type === 'income') .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
+  const totalIncome = transactions .filter((t) => t.type === 'income') .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
   
-  const totalExpenses = transactions .filter((t) => t.type === 'expense') .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
+  const totalExpenses = transactions .filter((t) => t.type === 'expense') .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
 
   return (
     <div 
@@ -29,15 +37,40 @@ const HomePage = () => {
           <option value="income">Income</option> 
         </select>
 
-        <input type="number" name="amount" placeholder="Amount" value={newTransaction.amount} onChange={handleInputChange} style={{ margin: '5px 0' }} />
+        <input 
+          type="number" 
+          name="amount" 
+          placeholder="Amount" 
+          value={newTransaction.amount} onChange={handleInputChange} 
+          style={{ margin: '10px 0', display: "block",  }}
+        />
 
-        <select name="category" value={newTransaction.category} onChange={handleInputChange}> 
-          <option value="">Select Category</option> {CATEGORIES[newTransaction.type].map((cat) => ( <option key={cat} value={cat}>{cat}</option> ))} 
+        <select 
+          name="category" 
+          value={newTransaction.category} 
+          onChange={handleInputChange}
+          style={{ margin: '10px 0', display: "block",  }}
+        > 
+          <option value="">Select Category</option> 
+          
+          {
+            CATEGORIES[newTransaction.type].map((cat) => ( <option key={cat} value={cat}>{cat}</option> ))
+          } 
         </select> 
         
-        <input type="text" name="notes" placeholder="Notes" value={newTransaction.notes} onChange={handleInputChange} style={{ margin: '5px 0' }} />
+        <input 
+          type="text" 
+          name="notes" 
+          placeholder="Notes" 
+          value={newTransaction.notes} 
+          onChange={handleInputChange} 
+          style={{ margin: '10px 0', display: "block" }} 
+        />
 
-        <button onClick={addTransaction} style={{ backgroundColor: '#4CAF50', color: 'white', padding: '8px 12px', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>Add</button> 
+        <button 
+          onClick={addTransaction} 
+          style={{ backgroundColor: '#4CAF50', color: 'white', padding: '8px 12px', border: 'none', borderRadius: '3px', cursor: 'pointer' }}
+        >Add</button> 
 
       </div>
 
