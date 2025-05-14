@@ -31,7 +31,7 @@ const HomePage = () => {
     <div 
     style={{ fontFamily: 'Arial, sans-serif', maxWidth: '400px', margin: '20px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}
     className='new'>
-      <h2>Personal Finance Tracker</h2> 
+      <h2 style={{ textAlign: "center", color: "blue" }}>Personal Finance Tracker</h2> 
       <div>
         <h3>Add Transaction</h3> 
         <select name="type" value={newTransaction.type} onChange={handleInputChange}> 
