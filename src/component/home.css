@@ -44,6 +44,28 @@
     width: 50%;
     padding: 5% 0;
 }
+.btn2 {
+    background-color: blue;
+    display: block;
+    width: 50%;
+    padding: 3% 0;
+    margin: 0 auto;
+    font-weight: 600;
+}
+.btn3 {
+    background-color: blue;
+    display: block;
+    width: 30%;
+    padding: 3% 0;
+    margin: 5% auto;
+    font-weight: 600;
+}
+.write {
+    display: block;
+}
+.unwrite {
+    display: none;
+}
 
 @media screen and (max-width: 800px) {
     .firstheader{
