@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import "../../src/component/home.css"
+import React, { useState } from 'react';
+import "../../src/component/home.css";
 
 const CATEGORIES = { 
   income: ['Salary', 'Bonus', 'Other'], 

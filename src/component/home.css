@@ -1,4 +1,72 @@
 .new{
     box-shadow: 0 15px 45px -20px rgba(0, 0, 255, 0.719);
     background-color: white;
+    border: 1px solid blue;
+}
+.firstheader{
+    color: blue;
+    font-size: 30px;
+    text-align: center;
+    margin: 10px 5px;
+}
+.secondheader{
+    color: blue;
+    font-size: 22px;
+    text-align: left;
+    padding: 10px 5px;
+}
+.thirdheader{
+    font-size: 18px;
+    text-align: left;
+    padding: 10px 5px;
+}
+.firstdiv {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    gap: 4%;
+}
+.seconddiv {
+    border-right: 2px solid blue;
+    padding: 5px 5px;
+}
+.thirddiv {
+    padding: 5px 5px;
+}
+.inp {
+    margin: 5% 0;
+}
+.btn {
+    background-color: blue;
+    display: block;
+    width: 50%;
+    padding: 5% 0;
+}
+
+@media screen and (max-width: 800px) {
+    .firstheader{
+        font-size: 20px;
+        margin: 10px 5px;
+    }
+    .secondheader{
+        font-size: 15px;
+        padding: 10px 5px;
+    }
+    .firstdiv {
+        grid-template-columns: 1fr;
+    }
+    .seconddiv {
+        border-right: none;
+        border-bottom: 2px solid blue;
+        padding: 15px 5px;
+    }
+    .inp {
+        margin: 5% 0;
+        display: block;
+    }
+    .btn {
+        padding: 15px 0;
+    }
 }
