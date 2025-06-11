@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../src/component/home.css"; 
 
 const CATEGORIES = { 
     income: ['Salary', 'Bonus', 'Other'], 
     expense: ['Food', 'Housing', 'Transport', 'Other'],
-}; 
+};
 
-function App() { 
+export const Works = () => {
+
+    const [newTransaction, setNewTransaction] = useState({ 
+        type: 'expense',
+        amount: '',
+        category: '',
+        notes: '',
+        date: new Date().toISOString().split('T')[0],
+    });
+
     const [transactions, setTransactions] = useState(() => { 
         if (typeof window !== 'undefined') { 
             const savedTransactions = localStorage.getItem('financeTransactions'); 
@@ -16,58 +25,47 @@ function App() {
             } 
         } return [];
     });
-    
-    const [newTransaction, setNewTransaction] = useState({ 
-    type: 'expense',
-    amount: '',
-    category: '',
-    notes: '',
-    date: new Date().toISOString().split('T')[0],
-    });
-    
+
     useEffect(() => { 
-            if (typeof window !== 'undefined') { 
+        if (typeof window !== 'undefined') { 
                 localStorage.setItem('financeTransactions', JSON.stringify(transactions)); 
             } 
         }, [transactions]
     ); 
-            
+
     const handleInputChange = (e) => { 
         const { name, value } = e.target;
         setNewTransaction((prev) => ({ ...prev, [name]: value })); 
     }; 
-
+    
     const addTransaction = () => { 
         if (newTransaction.amount && newTransaction.category && newTransaction.date) { 
             setTransactions([...transactions, { ...newTransaction, id: Date.now() }]);
             setNewTransaction({ type: 'expense', amount: '', category: '', notes: '', date: new Date().toISOString().split('T')[0],}); 
         }
     };
-        
+            
     const totalIncome = transactions.filter((t) => t.type === 'income').reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
-
-    const totalExpenses = transactions.filter((t) => t.type === 'expense').reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
     
-
+    const totalExpenses = transactions.filter((t) => t.type === 'expense').reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
+        
+    
     const [showDiv, setShowDiv] = useState(true);
     const [showTest, setTest] = useState(false);
-
+    
     const myDisplay = () => {
         setShowDiv(false)
         setTest(!showTest)
     };
-
+    
     const goBack = () => {
         setShowDiv(true)
         setTest(false)
     };
-        
-    return ( 
-    
-    <div 
-        style={{ fontFamily: 'Arial, sans-serif', maxWidth: '500px', margin: '50px auto', padding: '20px', borderRadius: '5px' }}
-        className='new'
-    > 
+
+  return (
+    <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '500px', margin: '50px auto', padding: '20px', borderRadius: '5px' }}
+        className='new'>
         <h1 className='firstheader'>Personal Finance Tracker</h1>
         <div className={showDiv ? "write" : "unwrite"}>
             <p style={{ padding: "5% 0", margin: "5% 0", }}>
@@ -82,7 +80,7 @@ function App() {
             >
                 Test
             </button> 
-        </div> 
+        </div>
         <div className={showTest ? "write" : "unwrite"}>
             <h2 className='secondheader'>Calculate your financial records</h2>
             <div className='firstdiv'> 
@@ -189,8 +187,6 @@ function App() {
                 Go Back
             </button> 
         </div>
-    </div> 
-    ); 
-} 
-
-export default App;
+    </div>
+  )
+}
