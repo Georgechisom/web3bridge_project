@@ -10,7 +10,7 @@
     margin: 10px 5px;
 }
 .secondheader{
-    color: blue;
+    /* color: blue; */
     font-size: 22px;
     text-align: left;
     padding: 10px 5px;
@@ -37,12 +37,16 @@
 }
 .inp {
     margin: 5% 0;
+    width: 80%;
+    padding: 3% 5px;
+    border: 1px solid blue;
 }
 .btn {
     background-color: blue;
     display: block;
-    width: 50%;
+    width: 80%;
     padding: 5% 0;
+    margin: 3% 0;
 }
 .btn2 {
     background-color: blue;
@@ -65,6 +69,9 @@
 }
 .unwrite {
     display: none;
+}
+.given{
+    color: blue;
 }
 
 @media screen and (max-width: 800px) {
@@ -90,5 +97,13 @@
     }
     .btn {
         padding: 15px 0;
+    }
+    .btn3 {
+        background-color: blue;
+        display: block;
+        width: 40%;
+        padding: 4% 0;
+        margin: 10% auto;
+        font-weight: 600;
     }
 }

@@ -3,10 +3,19 @@ import "../../src/component/home.css";
 
 const CATEGORIES = { 
     income: ['Salary', 'Bonus', 'Other'], 
-    expense: ['Food', 'Housing', 'Transport', 'Other'], 
+    expense: ['Food', 'Housing', 'Transport', 'Other'],
 }; 
 
-function App() { 
+function App() {
+    
+    const [newTransaction, setNewTransaction] = useState({ 
+    type: 'expense',
+    amount: '',
+    category: '',
+    notes: '',
+    date: new Date().toISOString().split('T')[0],
+    });
+
     const [transactions, setTransactions] = useState(() => { 
         if (typeof window !== 'undefined') { 
             const savedTransactions = localStorage.getItem('financeTransactions'); 
@@ -14,43 +23,45 @@ function App() {
             catch (error) { 
                 console.error("Error parsing transactions from localStorage:", error); return []; 
             } 
-        } return []; 
-    });
-    
-    const [newTransaction, setNewTransaction] = useState({ 
-        type: 'expense', 
-        amount: '', 
-        category: '', 
-        notes: '', 
-        date: new Date().toISOString().split('T')[0], 
+        } return [];
     });
     
     useEffect(() => { 
-        if (typeof window !== 'undefined') { 
-            localStorage.setItem('financeTransactions', JSON.stringify(transactions)); } 
+            if (typeof window !== 'undefined') { 
+                localStorage.setItem('financeTransactions', JSON.stringify(transactions)); 
+            } 
         }, [transactions]
     ); 
             
-        const handleInputChange = (e) => { 
-            const { name, value } = e.target; setNewTransaction((prev) => ({ ...prev, [name]: value })); }; 
-            const addTransaction = () => { if (newTransaction.amount && newTransaction.category && newTransaction.date) { setTransactions([...transactions, { ...newTransaction, id: Date.now() }]);
-            setNewTransaction({ type: 'expense', amount: '', category: '', notes: '', date: new Date().toISOString().split('T')[0], }); } 
-        }; 
+    const handleInputChange = (e) => { 
+        const { name, value } = e.target;
+        setNewTransaction((prev) => ({ ...prev, [name]: value })); 
+    }; 
+
+    const addTransaction = () => { 
+        if (newTransaction.amount && newTransaction.category && newTransaction.date) { 
+            setTransactions([...transactions, { ...newTransaction, id: Date.now() }]);
+            setNewTransaction({ type: 'expense', amount: '', category: '', notes: '', date: new Date().toISOString().split('T')[0],}); 
+        }
+    };
         
-    const totalIncome = transactions .filter((t) => t.type === 'income') .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); const totalExpenses = transactions .filter((t) => t.type === 'expense') .reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
+    const totalIncome = transactions.filter((t) => t.type === 'income').reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
+
+    const totalExpenses = transactions.filter((t) => t.type === 'expense').reduce((sum, t) => sum + parseFloat(t.amount || 0), 0); 
+    
 
     const [showDiv, setShowDiv] = useState(true);
-    const [showTest, setTest] = useState(false)
+    const [showTest, setTest] = useState(false);
 
     const myDisplay = () => {
         setShowDiv(false)
         setTest(!showTest)
-    }
+    };
 
     const goBack = () => {
         setShowDiv(true)
         setTest(false)
-    }
+    };
         
     return ( 
     
@@ -77,7 +88,7 @@ function App() {
             <h2 className='secondheader'>Calculate your financial records</h2>
             <div className='firstdiv'> 
                 <div className='seconddiv'>
-                    <h3 className='thirdheader'>Add Transaction</h3> 
+                    <h3 className='thirdheader given'>Add Transaction</h3> 
                     
                     <select 
                         name="type" 
@@ -137,7 +148,7 @@ function App() {
             
                 <div className='thirddiv'>
                     <div style={{ marginTop: '20px' }}> 
-                        <h3>Transactions</h3> 
+                        <h3 className='given'>Transactions</h3> 
                         {
                             transactions.length === 0 ? ( <p>No transactions yet.</p> ) : ( 
                                 <ul> {transactions.map((t) => ( 
@@ -152,7 +163,7 @@ function App() {
                     </div> 
                 
                     <div style={{ marginTop: '20px' }}> 
-                        <h3>Summary</h3> 
+                        <h3 className='given'>Summary</h3> 
                         <p>
                             <span style={{ fontWeight: "bold" }}>
                                 Total Income: 
